@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include ('includes/conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +12,13 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <!-- style css -->
-    <title>PIZZA CRUD</title>
+    <title>PIZZA</title>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container ">
         <div class="row">
-            <div class="col-md mt-5">
+            <div class="col-md-12 mt-5" >
 
                 <?php if(isset($_SESSION['alert'])): ?>
                       <h3 class="alert alert-success"><?= $_SESSION['alert']; ?> </h3>
@@ -29,25 +29,67 @@ session_start();
                 
                 ?>      
                 
-                <div class="card">
+                <div class="card shadow p-3 mb-5 bg-white rounded ">
                     <div class="card-header">
                         
-                        <h2 class="text-center">Pizza Store
+                        <h2 class="text-center">Pizza Shop
                             <a href="add-product.php" class="btn btn-primary float-end">Add Product</a>
                         </h2>
                     </div>
 
                     <div class="card-body">
                         <form action="add-product.php" method="POST">
-                            <table class="table-bordered tabled-striped">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Product ID</th>
                                         <th>Product Name</th>
+                                        <!-- <th>Product Image</th> -->
                                         <th>Product Quantity</th>
                                         <th>Product Price</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                <?php 
+                                    //create query
+                                    $query = "SELECT * FROM product";
+                                    //prepare the query
+                                    $query_stmt = $conn->prepare($query);
+                                    //execute the query
+                                    $query_stmt->execute();
+                                    //fetch all the data from the fb
+                                    $result = $query_stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    // check the if the result did run
+                                    if ($result){
+                                        
+                                        //loop all items
+                                       foreach ($result as $row) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $row['product_id'];?></td>
+                                                <td><?= $row['product_name'];?></td>
+                                                <!-- <td><//?= $row['product_img'];?></td> -->
+                                                <td><?= $row['product_qty'];?></td>
+                                                <td><?= $row['product_price'];?></td>
+                                                <td>
+                                                    <a href="product-edit.php?id=<?=$row['product_id'];?>" class="btn btn-primary">Edit</a>
+                                                </td>
+                                            </tr>
+                                            
+                                        <?php
+                                       }
+
+                                    } else {
+                                        ?>
+                                            <tr>
+                                                <td colspan="4">No record found</td>
+                                            </tr>
+                                        <?php
+                                    }
+                                ?>
+                                    
+                                </tbody>
                             </table>
                         </form>
                     </div>

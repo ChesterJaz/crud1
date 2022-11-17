@@ -1,0 +1,12 @@
+body{
+    background-image: url("img/pizza2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.card {
+    position: relative;
+    top: 30%;
+    
+}

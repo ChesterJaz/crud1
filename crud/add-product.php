@@ -14,8 +14,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-5 mt-5">
-                <div class="card">
+            <div class="col-md-12 mt-5">
+                <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-header">
                         
                         <h3>Product Details
@@ -24,12 +24,18 @@
                     </div>
                     
                     <div class="card-body">
-                        <form action="code.php" method="POST">
+                        <form action="code.php" method="POST" enctype="multipart/form-data">
                             
                             <div class="form-floating mb-3">
                                 <input type="text" name = "ProductName" class="form-control" placeholder="@">
                                 <label for="">Product Name</label>
                             </div>
+
+                            <!-- <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupFile01">Product Image</label>
+                                <input type="file" class="form-control" name = "ProductImage" id="inputGroupFile01">
+                            </div> -->
+
 
                             <div class="form-floating mb-3">
                                 <input type="number" name = "ProductQty" class="form-control" placeholder="@">

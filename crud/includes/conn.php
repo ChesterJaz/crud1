@@ -12,7 +12,7 @@ try {
     //create pdo connection
     $conn = new PDO($dsn,$user,$pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Success";
+    
 } catch (PDOException $e) {
     echo "Failed Connection" . $e->getMessage();
 }
