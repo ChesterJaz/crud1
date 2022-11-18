@@ -23,14 +23,16 @@ include ('includes/conn.php');
                 <div class="card shadow p-3 mb-5 bg-white rounded ">
                     <div class="card-header">
                         
-                        <h2 class="text-center">Pizza Shop <i class="bi bi-shop"></i>
-                            <a href="add-product.php" class="btn btn-primary float-end btn-md"><i class="bi bi-plus-square me-2"></i>Add Product</a>
-                        </h2>
+                        <h2 class="text-center">Pizza Shop <i class="bi bi-shop"></i></h2>
+                        <div>
+                            <a href="add-product.php" class="btn btn-primary float-end"><i class="bi bi-plus-square me-2"></i>Add Product</a>
+                            <a href="index.php" class="btn btn-danger">Back</a>
+                        </div>
                     </div>
                     <div class="container-fluid mt-2">
 
-                        <form action="product_search.php" method="POST" class="d-flex" role="search">
-                            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <form action="" method="GET" class="d-flex" role="search">
+                            <input class="form-control me-2" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search'];}?>" type="search" placeholder="Search products..">
                             <button class="btn btn-outline-success btn" type="submit">Search</button>
                         </form>
 
@@ -38,7 +40,7 @@ include ('includes/conn.php');
                       
                      </div>
                     <div class="card-body">
-                        <form action="code.php" method="POST">
+                        
                             <table class="table table-striped table-bordered table-hover">
                                 <thead >
                                     <tr>
@@ -56,18 +58,18 @@ include ('includes/conn.php');
                                 
                                 if(isset($_GET['search'])) {
                                     
-                                    $keyword = $_GET['keyword'];
+                                    $keyword = $_GET['search'];
                                 
-                                    $sql = "SELECT * FROM product WHERE product_name = '{$keyword}'";
-                                    // -- product_qty = '{$keyword}'
-                                    // -- product_price = '{$keyword}'
-                                    // -- product_id = '{$keyword}'"
+                                    $sql = "SELECT * FROM product WHERE CONCAT 
+                                    (product_name, product_qty, product_price) 
+                                    LIKE '%$keyword%'";
+                                   
                                     
                                 
                                     $stmt = $conn->prepare($sql);
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+                                    if ($result){
                                     foreach ($result as $row){
                                         ?>
                                         <tr>
@@ -85,12 +87,11 @@ include ('includes/conn.php');
                                                         <!-- <a href="code.php?id=<?//=$row['product_id'];?>" name = "deleteProduct" class="btn btn-danger btn-sm d-inline"><i class="bi bi-trash me-2"></i></i></i>Delete</a> -->
                                                     </form>
                                                 </td>    
-                                                
-                                               
-                                                
+                
                                             </tr>
                                          
                                         <?php
+                                        
                                        }
 
                                     } else {
@@ -100,6 +101,7 @@ include ('includes/conn.php');
                                             </tr>
                                         <?php
                                     }
+                                }
                                 ?>
                                     
                                 </tbody>

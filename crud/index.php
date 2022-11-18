@@ -27,13 +27,14 @@ include ('includes/conn.php');
                 <div class="card shadow p-3 mb-5 bg-white rounded ">
                     <div class="card-header">
                         
-                        <h2 class="text-center">Pizza Shop <i class="bi bi-shop"></i>
+                        <h2 class="text-center">Pizza Shop <i class="bi bi-shop"></i></h2>
+                        <div>
                             <a href="add-product.php" class="btn btn-primary float-end btn-md"><i class="bi bi-plus-square me-2"></i>Add Product</a>
-                        </h2>
+                        </div>
                     </div>
                     <div class="container-fluid mt-2">
-                        <form action="product_search.php" method="POST" class="d-flex" role="search">
-                            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <form action="product_search.php" method="GET" class="d-flex" role="search">
+                            <input class="form-control me-2" name="search"  type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success btn" type="submit">Search</button>
                         </form>
                      </div>
