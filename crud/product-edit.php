@@ -29,30 +29,36 @@
                     </div>
                     
                     <div class="card-body">
-                        <?php
-                        if(isset($_GET['product_id'])){
+                        <?php 
+                        
+                        if(isset($_GET['id'])){
+                            $product_id = $_GET['id'];
 
-                            $product_id = $_GET['product_id'];
                             
-                            
-
-                            $sql = 'SELECT * FROM product WHERE product_id = :product_id LIMIT 1';
+                            $sql = 'SELECT * FROM product WHERE product_id = :id';
                             $sql_stmt = $conn->prepare($sql);
-                            $data = [':product_id' => $product_id];
-                            $sql_stmt->execute($data);
-                            $result = $sql_stmt->fetch(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC
+
+                            $item = [':id' => $product_id];
+
+                            //execute data
+                            $sql_stmt->execute($item);             
+                            
+                            //fetch data
+                            $result = $sql_stmt->fetch(PDO::FETCH_ASSOC);
                             
                             
-                            
+
+
                         }
-            
+                        
+                        
                         ?>
                         <form action="code.php" method="POST" enctype="multipart/form-data">
 
-                        <input type="text" name = "ProductID" value="<?= $result['product_id']; ?>" class="form-control" placeholder="@">
-                
+                            <input type="hidden" name = "product_id" value="<?= $result['product_id'];?>" class="form-control" placeholder="@">
+                            
                             <div class="form-floating mb-3">
-                                <input type="text" name = "ProductName" value="<?= $result['product_name']; ?>" class="form-control" placeholder="@">
+                                <input type="text" name = "ProductName" value="<?= $result['product_name'];?>" class="form-control" placeholder="@">
                                 <label for="">Product Name</label>
                             </div>
 
