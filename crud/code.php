@@ -2,6 +2,57 @@
 session_start();
 include ('includes/conn.php');
 
+if(isset($_POST['search'])) {
+    $keyword = $_POST['keyword'];
+
+    $sql = 'SELECT * FROM product WHERE product_id LIKE "$keyword" 
+    OR LIKE product_name = "$keyword" 
+    OR LIKE product_qty= "$keyword"
+    OR LIKE product_qprice= "$keyword"
+    OR LIKE product_id= "$keyword"';
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->execute();
+
+    
+}
+
+
+
+
+if(isset($_POST['deleteProduct'])){
+    $product_id = $_POST['deleteProduct'];
+
+    try{
+
+        //create sql 
+        $sql = 'DELETE FROM product WHERE product_id = :id';
+        //prepare
+        $stmt = $conn->prepare($sql);
+        
+        $item = [
+            ':id' => $product_id];
+        $result = $stmt->execute($item);
+
+        if ($result) {
+            $_SESSION['alert'] = "Sucessfully Product Deleted";
+            header('location:index.php');
+            exit();
+        } else {
+            $_SESSION['alert'] = "Failed Product Deleted";
+            header('location:index.php');
+            exit();
+        }
+
+
+
+    } catch (PDOException $e) {
+        echo "Error" . $e->getMessage();
+    }
+}
+
+
 if(isset($_POST['saveProduct'])){
 
     // $cust_id = $_POST['cust_id'];
@@ -68,7 +119,7 @@ if (isset($_POST['editProduct'])) {
     
 
         if($result){
-            $_SESSION['alert'] = "Sucessfully";
+            $_SESSION['alert'] = "Sucessfully Updated Product";
             header('location:index.php');
             exit();
            } else{

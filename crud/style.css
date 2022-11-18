@@ -5,4 +5,12 @@ body{
 
 }
 
+.container{
+    margin-top: 50px;
+}
+
+.row {
+    top: 50%;
+}
+
 

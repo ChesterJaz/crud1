@@ -2,28 +2,21 @@
 session_start();
 include ('includes/conn.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <!-- css icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
-    <!-- style css -->
-    <title>PIZZA</title>
-</head>
-<body>
 
+
+<?php include ('header.php');?>
+
+
+
+
+<body>
+<!-- <nav class="navbar navbar-light"> -->
     <div class="container ">
         <div class="row">
             <div class="col-md-12 mt-5" >
 
                 <?php if(isset($_SESSION['alert'])): ?>
-                      <h3 class="alert alert-success"><?= $_SESSION['alert']; ?> </h3>
+                      <h5 class="alert alert-success"><?= $_SESSION['alert']; ?> </h5>
                 <?php 
                 
                     unset($_SESSION['alert']);
@@ -34,15 +27,20 @@ include ('includes/conn.php');
                 <div class="card shadow p-3 mb-5 bg-white rounded ">
                     <div class="card-header">
                         
-                        <h2 class="text-center">Pizza Shop
-                            <a href="add-product.php" class="btn btn-primary float-end">Add Product</a>
+                        <h2 class="text-center">Pizza Shop <i class="bi bi-shop"></i>
+                            <a href="add-product.php" class="btn btn-primary float-end btn-md"><i class="bi bi-plus-square me-2"></i>Add Product</a>
                         </h2>
                     </div>
-
+                    <div class="container-fluid mt-2">
+                        <form action="product_search.php" method="POST" class="d-flex" role="search">
+                            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success btn" type="submit">Search</button>
+                        </form>
+                     </div>
                     <div class="card-body">
-                        <form action="add-product.php" method="POST">
-                            <table class="table table-striped table-bordered">
-                                <thead>
+                        <form action="code.php" method="POST">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead >
                                     <tr>
                                         <th>Product ID</th>
                                         <th>Product Name</th>
@@ -50,9 +48,10 @@ include ('includes/conn.php');
                                         <th>Product Quantity</th>
                                         <th>Product Price</th>
                                         <th>Action</th>
+                                        
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="table-group-divider">
                                 <?php 
                                     //create query
                                     $query = "SELECT * FROM product";
@@ -75,9 +74,17 @@ include ('includes/conn.php');
                                                 <td><?=$row['product_qty'];?></td>
                                                 <td><?=$row['product_price'];?></td>
                                                 <td>
-                                                    <a href="product-edit.php?id=<?=$row['product_id'];?>" class="btn btn-primary"><i class="bi bi-pencil-square me-2"></i>Edit</a>
+                                                    <a href="product-edit.php?id=<?=$row['product_id'];?>" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square me-2"></i>Edit</a>
+                                                    <a href="product-view.php?id=<?=$row['product_id'];?>" name = "viewProduct" class="btn btn-info btn-sm"><i class="bi bi-eye me-2"></i></i>View</a>
                                                     
-                                                </td>
+                                                    <form action="code.php" method="POST" class="d-inline">
+                                                        <button class="btn btn-danger btn-sm" value="<?=$row['product_id'];?>" name = "deleteProduct"><i class="bi bi-trash me-2"></i>Delete</button>
+                                                        <!-- <a href="code.php?id=<?//=$row['product_id'];?>" name = "deleteProduct" class="btn btn-danger btn-sm d-inline"><i class="bi bi-trash me-2"></i></i></i>Delete</a> -->
+                                                    </form>
+                                                </td>    
+                                                
+                                               
+                                                
                                             </tr>
                                         <?php
                                        }
@@ -99,7 +106,7 @@ include ('includes/conn.php');
             </div>
         </div>
     </div>
-
+<!-- </nav> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
