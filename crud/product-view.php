@@ -11,7 +11,7 @@ include ('includes/conn.php');
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="card-header">
                         
-                        <h3>Edit Product
+                        <h3>View Product
                             <a href="index.php" class="btn btn-danger float-end">Back</a>
                         </h3>
                     </div>

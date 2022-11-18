@@ -80,11 +80,11 @@ if(isset($_POST['saveProduct'])){
    if($sql_execute){
     $_SESSION['alert'] = "Sucessfully Product Added";
     header('location:index.php');
-    exit();
+    exit(0);
    } else{
     $_SESSION['alert'] = "Failed";
     header('location:index.php');
-    exit();
+    exit(0);
    }
 }
 
@@ -121,11 +121,11 @@ if (isset($_POST['editProduct'])) {
         if($result){
             $_SESSION['alert'] = "Sucessfully Updated Product";
             header('location:index.php');
-            exit();
+            exit(0);
            } else{
             $_SESSION['alert'] = "Failed Edit Product";
             header('location:index.php');
-            exit();
+            exit(0);
            }
 
 
