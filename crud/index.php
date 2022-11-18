@@ -35,12 +35,20 @@ session_start();
                         <h2 class="text-center">Pizza Store
                             <a href="add-product.php" class="btn btn-primary float-end">Add Product</a>
                         </h2>
-                        
                     </div>
 
                     <div class="card-body">
-                        <form action="" method="POST">
-                            table
+                        <form action="add-product.php" method="POST">
+                            <table class="table-bordered tabled-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Product Name</th>
+                                        <th>Product Quantity</th>
+                                        <th>Product Price</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </form>
                     </div>
                 </div>

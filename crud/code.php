@@ -4,6 +4,7 @@ include ('includes/conn.php');
 
 if(isset($_POST['saveProduct'])){
 
+    // $cust_id = $_POST['cust_id'];
     $productName = $_POST['ProductName'];
     $productQty = $_POST['ProductQty'];
     $productPrice = $_POST['ProductPrice'];
