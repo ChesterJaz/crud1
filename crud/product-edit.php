@@ -33,18 +33,23 @@
                         if(isset($_GET['product_id'])){
 
                             $product_id = $_GET['product_id'];
+                            
+                            
 
                             $sql = 'SELECT * FROM product WHERE product_id = :product_id LIMIT 1';
                             $sql_stmt = $conn->prepare($sql);
                             $data = [':product_id' => $product_id];
                             $sql_stmt->execute($data);
-                            $result = $sql_stmt->fetch(PDO::FETCH_ASSOC);
+                            $result = $sql_stmt->fetch(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC
+                            
                             
                             
                         }
             
                         ?>
                         <form action="code.php" method="POST" enctype="multipart/form-data">
+
+                        <input type="text" name = "ProductID" value="<?= $result['product_id']; ?>" class="form-control" placeholder="@">
                 
                             <div class="form-floating mb-3">
                                 <input type="text" name = "ProductName" value="<?= $result['product_name']; ?>" class="form-control" placeholder="@">
@@ -58,12 +63,12 @@
 
 
                             <div class="form-floating mb-3">
-                                <input type="number" value="<?=$result['product_qty'];?>" name = "ProductQty" class="form-control" placeholder="@">
+                                <input type="number" value="<?= $result['product_qty']; ?>" name = "ProductQty" class="form-control" placeholder="@">
                                 <label for="">Product Quantity</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="number" name = "ProductPrice" class="form-control" placeholder="@">
+                                <input type="number" name = "ProductPrice" value="<?= $result['product_price']; ?>" class="form-control" placeholder="@">
                                 <label for="">Product Price</label>
                             </div>
 

@@ -10,6 +10,8 @@ include ('includes/conn.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- css icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <!-- style css -->
     <title>PIZZA</title>
@@ -67,23 +69,23 @@ include ('includes/conn.php');
                                        foreach ($result as $row) {
                                         ?>
                                             <tr>
-                                                <td><?= $row['product_id'];?></td>
-                                                <td><?= $row['product_name'];?></td>
+                                                <td><?=$row['product_id'];?></td>
+                                                <td><?=$row['product_name'];?></td>
                                                 <!-- <td><//?= $row['product_img'];?></td> -->
-                                                <td><?= $row['product_qty'];?></td>
-                                                <td><?= $row['product_price'];?></td>
+                                                <td><?=$row['product_qty'];?></td>
+                                                <td><?=$row['product_price'];?></td>
                                                 <td>
-                                                    <a href="product-edit.php?id=<?=$row['product_id'];?>" class="btn btn-primary">Edit</a>
+                                                    <a href="product-edit.php?id=<?=$row['product_id'];?>" class="btn btn-primary"><i class="bi bi-pencil-square me-2"></i>Edit</a>
+                                                    
                                                 </td>
                                             </tr>
-                                            
                                         <?php
                                        }
 
                                     } else {
                                         ?>
                                             <tr>
-                                                <td colspan="4">No record found</td>
+                                                <td colspan="5">No record found</td>
                                             </tr>
                                         <?php
                                     }
